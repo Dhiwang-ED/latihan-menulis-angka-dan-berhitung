@@ -114,39 +114,43 @@
     background: #2c64b0;
   }
 
-  @media print {
-    body {
-      background: #ffffff;
-      margin: 0;
-      color: black;
-    }
-    .container {
-      box-shadow: none;
-      border-radius: 0;
-      padding: 15px 20px;
-      margin: 0;
-      max-width: 100%;
-      background: #f5faff;
-      border: 3px dashed #3b7dd8;
-    }
-    button, .btn-group {
-      display: none;
-    }
-    .placeholder-guide {
-      opacity: 0.2;
-    }
-    h1 {
-      color: #1f3a6e;
-      font-size: 26px;
-      border-bottom: 2px solid #3b7dd8;
-      padding-bottom: 6px;
-    }
-    .instructions {
-      font-size: 14px;
-      font-style: italic;
-      color: #2c64b0;
-    }
+ @media print {
+  body {
+    background: #f0f8ff; /* samakan dengan warna layar */
+    color: #1f3a6e;
+    margin: 20px;
   }
+
+  .container {
+    background: #e3f0ff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px 25px;
+    border-radius: 12px;
+    max-width: 720px;
+    margin: auto;
+  }
+
+  button, .btn-group {
+    display: none; /* tetap hilangkan tombol jika perlu */
+  }
+
+  .placeholder-guide {
+    opacity: 0.3;
+  }
+
+  h1 {
+    color: #1f3a6e;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .instructions {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
 </style>
 </head>
 <body>
