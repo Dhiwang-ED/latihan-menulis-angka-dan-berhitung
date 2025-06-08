@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Worksheet Latihan Menulis Angka dan Berhitung</title>
+<style>
+  @font-face {
+    font-family: 'KGPrimaryDots';
+    src: url('fonts/KGPrimaryDots.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: #e6f0fa;
+    margin: 20px;
+    color: #254b82;
+  }
+
+  h1 {
+    font-size: 30px;
+    text-align: center;
+    color: #1f3a6e;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #dce9f9;
+    border-radius: 12px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .instructions {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 40px;
+  }
+
+  .soal-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .placeholder-guide {
+    font-family: 'KGPrimaryDots', cursive;
+    font-size: 60px;
+    color: #000;
+    opacity: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  .tempat-tulis-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    height: 50px;
+    margin-top: 8px;
+  }
+
+  .tempat-tulis {
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px dashed #3b7dd8;
+    border-radius: 6px;
+    font-size: 32px;
+    padding-left: 8px;
+    color: #254b82;
+    outline: none;
+    resize: none;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .btn-group {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  button {
+    background: #3b7dd8;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    margin: 0 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 3px 6px rgba(59,125,216,0.4);
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background: #2c64b0;
+  }
+
+  @media print {
+    body {
+      background: #ffffff;
+      margin: 0;
+      color: black;
+    }
+    .container {
+      box-shadow: none;
+      border-radius: 0;
+      padding: 15px 20px;
+      margin: 0;
+      max-width: 100%;
+      background: #f5faff;
+      border: 3px dashed #3b7dd8;
+    }
+    button, .btn-group {
+      display: none;
+    }
+    .placeholder-guide {
+      opacity: 0.2;
+    }
+    h1 {
+      color: #1f3a6e;
+      font-size: 26px;
+      border-bottom: 2px solid #3b7dd8;
+      padding-bottom: 6px;
+    }
+    .instructions {
+      font-size: 14px;
+      font-style: italic;
+      color: #2c64b0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Worksheet Latihan Menulis Angka dan Berhitung</h1>
+    <div class="instructions">
+      Tulis ulang soal dan hasilnya pada garis di bawah (mengikuti tulisan putus-putus).
+    </div>
+    <div class="grid" id="gridContainer"></div>
+    <div class="btn-group">
+      <button id="btnBuatSoal">Buat Soal Baru</button>
+      <button onclick="window.print()">Cetak</button>
+    </div>
+  </div>
+
+<script>
+  function generateSoal() {
+    const soalSet = new Set();
+    while (soalSet.size < 20) {
+      const a = Math.floor(Math.random() * 10 + 1);
+      const b = Math.floor(Math.random() * 10 + 1);
+      soalSet.add(`${a} + ${b}`);
+    }
+    return Array.from(soalSet);
+  }
+
+  const gridContainer = document.getElementById("gridContainer");
+  const btnBuatSoal = document.getElementById("btnBuatSoal");
+
+  function buatSoal() {
+    const soalList = generateSoal();
+    gridContainer.innerHTML = "";
+    soalList.forEach(soal => {
+      const hasil = eval(soal);
+      const fullText = `${soal} = ${hasil}`;
+      const div = document.createElement("div");
+      div.className = "soal-item";
+      div.innerHTML = `
+        <div class="tempat-tulis-wrapper">
+          <div class="placeholder-guide">${fullText}</div>
+          <textarea class="tempat-tulis" readonly></textarea>
+        </div>
+      `;
+      gridContainer.appendChild(div);
+    });
+  }
+
+  btnBuatSoal.addEventListener("click", buatSoal);
+  buatSoal();
+</script>
+</body>
+</html>
